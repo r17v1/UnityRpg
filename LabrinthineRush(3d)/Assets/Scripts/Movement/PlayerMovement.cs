@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using RPG.Helper;
 
 namespace RPG.movement
 {
@@ -13,6 +13,8 @@ namespace RPG.movement
         [SerializeField]private float jumpSpeed = 8.0f;
         [SerializeField]private float gravity = 20.0f;
         [SerializeField]private float rotationSpeed = 8.0f;
+        [SerializeField] public float dodgeTime = 0.25f;
+        public float dodging = 0f;
 
         private Animator animator;
         private Vector3 moveDirection = Vector3.zero;
@@ -28,23 +30,26 @@ namespace RPG.movement
 
         public void Move()
         {
+            
+
             var currentSpeed = GetCurrentSpeed();
             if (characterController.isGrounded)
             {
                 moveDirection = new Vector3(0f, 0.0f, 0.0f);
-                if (currentSpeed != 0)
-                {
+                
                     Rotate();
                     moveDirection = new Vector3(0f, 0.0f, 1.0f);
                     moveDirection = transform.TransformDirection(moveDirection);
                     moveDirection *= currentSpeed;
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        GetComponent<Animator>().SetTrigger("jump");
+                        moveDirection.y = jumpSpeed;
+                    }
 
-                }
-               
-                if (Input.GetButton("Jump"))
-                {
-                    moveDirection.y = jumpSpeed;
-                }
+                
+
+                
             }
             
             moveDirection.y -= gravity * Time.deltaTime;
@@ -52,6 +57,7 @@ namespace RPG.movement
             characterController.Move(moveDirection * Time.deltaTime);
             AnimateMovement();
         }
+
         public float GetCurrentSpeed()
         {
             var inputX = Input.GetAxis("Vertical");
@@ -82,12 +88,23 @@ namespace RPG.movement
             var inputX = Input.GetAxis("Vertical");
             var inputY = Input.GetAxis("Horizontal");
             if (Mathf.Abs(inputX) < 0.01f && Mathf.Abs(inputY) < 0.01f) return;
-            var angle = Mathf.Atan2(inputY, inputX);
+            var angle = Mathf.Atan2(inputY, inputX); 
             angle = Mathf.Rad2Deg * angle;
             angle += mainCamera.transform.eulerAngles.y;
 
             var targetRotation = Quaternion.Euler(0, angle, 0);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
+
+        public void LookAtEnemy(Transform enemy)
+        {
+            Debug.Log("lookat");
+            if (enemy != null)
+            {
+                transform.rotation= Quaternion.Slerp(transform.rotation, Rotation.LookAtY(transform.position, enemy.position),rotationSpeed*Time.deltaTime);
+            }
+        }
+
+       
     }
 }

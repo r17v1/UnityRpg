@@ -63,10 +63,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\animation.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraControl.cs" />
     <Compile Include="Assets\Scripts\Combat\Combat.cs" />
+    <Compile Include="Assets\Scripts\Combat\EnemyStats.cs" />
     <Compile Include="Assets\Scripts\Combat\Stats.cs" />
+    <Compile Include="Assets\Scripts\Controller\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Controller\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\HelperScripts\Comparer.cs" />
+    <Compile Include="Assets\Scripts\HelperScripts\Rotation.cs" />
+    <Compile Include="Assets\Scripts\Movement\AiMovement.cs" />
     <Compile Include="Assets\Scripts\Movement\PlayerMovement.cs" />
     <None Include="Assets\Assets\Asset Packs\Animations by Explosive\README - Usage Rights for these assets 1.txt" />
     <None Include="Assets\Assets\Asset Packs\Synty - Polygon Student Sample\README - Usage Rights for these assets.txt" />
