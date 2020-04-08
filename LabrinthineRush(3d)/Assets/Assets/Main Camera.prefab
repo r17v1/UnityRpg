@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3709364113447756648}
   - component: {fileID: 3709364113447756649}
   - component: {fileID: 3709364113447756654}
-  - component: {fileID: 455072041}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -109,16 +108,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   offset: 2
---- !u!65 &455072041
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3709364113447756650}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  lockOn: {fileID: 0}

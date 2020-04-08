@@ -5,6 +5,7 @@ using UnityEngine;
 using RPG.Helper;
 using RPG.combat;
 using RPG.movement;
+using RPG.camera;
 
 namespace RPG.controller
 {
@@ -28,6 +29,7 @@ namespace RPG.controller
             stats = GetComponent<Stats>();
             anim = GetComponent<Animator>();
             charControl = GetComponent<CharacterController>();
+            combat.invoke = true;
         }
 
         // Update is called once per frame
@@ -42,11 +44,17 @@ namespace RPG.controller
             {
                 Collider[] array = Physics.OverlapSphere(transform.position, 1000f, layer);
                 Debug.Log(array.Length);
-                if (array.Length >1)
+                if (array.Length >1 && Camera.main.transform.GetComponent<CameraControl>().lockOn==null)
                 {
                     Array.Sort(array, new Helper.Comparer(transform));
 
-                    move.LookAtEnemy(array[1].transform);
+                    Camera.main.transform.GetComponent<CameraControl>().lockOn = array[1].transform;
+                    move.lockOn = true;
+                }
+                else
+                {
+                    Camera.main.transform.GetComponent<CameraControl>().lockOn = null;
+                    move.lockOn = false;
                 }
             }
             if (Input.GetKeyDown(KeyCode.LeftControl))

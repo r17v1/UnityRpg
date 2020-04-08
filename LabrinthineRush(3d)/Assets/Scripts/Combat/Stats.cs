@@ -34,5 +34,6 @@ namespace RPG.combat
             death = true;
             Destroy(gameObject, 5);
         }
+        
     }
 }

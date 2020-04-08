@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using RPG.Helper;
 
 namespace RPG.camera
 {
@@ -7,7 +8,7 @@ namespace RPG.camera
         // Start is called before the first frame update
 
         public Transform player;
-        [SerializeField] private float inputDistance = 6f, minDistance = 2f, maxDistance = 5f;
+        [SerializeField] private float initialDistance = 3f, distance;
         [SerializeField] private float sensitivityX = 4.0f;
         [SerializeField] private float sensitivityY = 1.0f;
         private float currentX = 0f;
@@ -17,9 +18,31 @@ namespace RPG.camera
         public LayerMask collisionMask;
         Vector3 playerOffset;
         [SerializeField]float offset=2f;
+
+        public Transform lockOn=null;
+        bool follow=true;
        
 
-        void Update()
+        public void Init(Transform target)
+        {
+            player = target;
+        }
+
+
+        
+
+        public void Tick()
+        {
+
+            
+            GetMouseMovement();
+           
+                MoveCamera();
+            
+        }
+
+
+        public void GetMouseMovement()
         {
             playerOffset = new Vector3(player.position.x, player.position.y + offset, player.position.z);
             currentX += Input.GetAxis("Mouse X") * sensitivityX;
@@ -28,29 +51,71 @@ namespace RPG.camera
 
             currentY -= Input.GetAxis("Mouse Y") * sensitivityY;
 
-            inputDistance += 2f * Input.GetAxis("Mouse ScrollWheel");
+            //inputDistance += 2f * Input.GetAxis("Mouse ScrollWheel");
 
-            inputDistance = Mathf.Clamp(inputDistance, minDistance, maxDistance);
+            //inputDistance = Mathf.Clamp(inputDistance, minDistance, maxDistance);
             currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
-
         }
 
 
-        private void LateUpdate()
+        public void MoveCamera()
         {
-            float distance = inputDistance;
-            Vector3 dir = new Vector3(0, 0, -distance);
-            Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
-            transform.position = playerOffset + rotation * dir;
-            transform.LookAt(playerOffset);
-            distance = HitDetection();
-            if (distance != -1)
+            distance = initialDistance;
+
+            if (lockOn == null)
             {
-                distance -= 0.1f;
-                dir = new Vector3(0, 0, -distance);
-                rotation = Quaternion.Euler(currentY, currentX, 0);
-                transform.position = playerOffset + rotation * dir;
+                Vector3 dir = new Vector3(0, 0, -distance);
+                Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
+                var targetPos= playerOffset + rotation * dir;
+                //transform.position = targetPos;
+                transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 4);  //edit
+
                 transform.LookAt(playerOffset);
+
+                //transform.rotation = Quaternion.Slerp(transform.rotation, Rotation.LookAt(transform.position, playerOffset),Time.deltaTime*10);//edit
+                
+                distance = HitDetection();
+                if (distance != -1)
+                {
+                    distance -= 0.1f;
+                    dir = new Vector3(0, 0, -distance);
+                    rotation = Quaternion.Euler(currentY, currentX, 0);
+                    transform.position = playerOffset + rotation * dir;
+                    transform.LookAt(playerOffset);
+                   // targetPos = playerOffset + rotation * dir;
+                    //transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 4);//edit
+                    //transform.rotation = Quaternion.Slerp(transform.rotation, Rotation.LookAt(transform.position, playerOffset), Time.deltaTime * 4);//edit
+
+                }
+            }
+            else
+            {
+
+
+                player.rotation = Rotation.LookAtY(player.position, lockOn.position);
+                var target = lockOn.transform.position;
+                Vector3 dir = target - playerOffset;
+                dir.y = 0;
+                dir.Normalize();
+                var targetPos = playerOffset + dir * distance * -1f;
+                transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 4);
+                transform.LookAt(playerOffset);
+
+                
+
+                distance = HitDetection();
+                if (distance != -1)
+                {
+                    distance -= 0.1f;
+                    dir = target - playerOffset;
+                    dir.y = 0;
+                    dir.Normalize();
+
+                    transform.position= playerOffset + dir * distance * -1f;
+                    
+                    transform.LookAt(playerOffset);
+                   
+                }
             }
         }
 
@@ -59,7 +124,7 @@ namespace RPG.camera
         {
 
             RaycastHit hit;
-            if (Physics.Raycast(playerOffset, transform.position - playerOffset, out hit, inputDistance, collisionMask))
+            if (Physics.Raycast(playerOffset, transform.position - playerOffset, out hit, distance, collisionMask))
             {
                 if (hit.collider.transform.parent != null&& hit.collider.transform.parent.name=="Stage")
                 {
@@ -68,7 +133,6 @@ namespace RPG.camera
                 }
             }
             return -1;
-            //Debug.DrawRay(ray.origin,ray.direction*50,Color.yellow);
         }
 
     }

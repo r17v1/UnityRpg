@@ -10,6 +10,7 @@ namespace RPG.combat
         [SerializeField] private float weaponDamage = 200f;
         [SerializeField] private float cooldown = 1f;
         [SerializeField] private float dodgeCooldown = 1f;
+        public bool invoke = false;
 
         bool invokedDodge = false;
         bool invokedAttack = false;
@@ -22,6 +23,7 @@ namespace RPG.combat
 
         private void Start()
         {
+            invoke = false;
             animator = GetComponent<Animator>();
             animator.ResetTrigger("attack");
             damage = new HashSet<Collider>();
@@ -32,11 +34,7 @@ namespace RPG.combat
             timeSinceLastDodge += Time.deltaTime;
             timeSinceLastAttack = Mathf.Clamp(timeSinceLastAttack, 0, cooldown);
             timeSinceLastDodge = Mathf.Clamp(timeSinceLastDodge, 0, dodgeCooldown);
-            if (IsAttacking())
-            {
-                AddDamage(hitDetection[0]);
-            }
-            ;
+           
 
         }
 
@@ -49,7 +47,7 @@ namespace RPG.combat
                 animator.SetTrigger("attack");
                 timeSinceLastAttack = 0f;
             }
-            else InvokeAttack(Mathf.Max(cooldown - timeSinceLastAttack, dodgeCooldown - timeSinceLastDodge));
+            else if(invoke) InvokeAttack(Mathf.Max(cooldown - timeSinceLastAttack, dodgeCooldown - timeSinceLastDodge));
             
         }
 
@@ -65,47 +63,7 @@ namespace RPG.combat
             else InvokeDodge(Mathf.Max(cooldown-timeSinceLastAttack,dodgeCooldown-timeSinceLastDodge));
         }
 
-        private void Hit()
-        {
-
-            DoDamage();
-            
-        }
-
-        public void DoDamage()
-        {   
-            
-            foreach (var d in damage)
-            {
-
-                d.transform.parent.parent.GetComponent<Stats>().TakeDamage(weaponDamage);
-            }
-            damage.Clear();
-        }
-
-        public void AddDamage(Collider col)
-        {
-            
-            
-            Collider[] cols = Physics.OverlapBox(col.transform.position, col.transform.localScale / 2, col.transform.rotation, LayerMask.GetMask("hitbox"));
-            Debug.Log(cols.Length);
-
-
-            foreach (var c in cols)
-            {
-
-                if (c.transform.parent.parent == transform) continue;
-                if (c.transform.parent.parent.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("dodge")) 
-                {
-                    Debug.Log("Dodging");
-                    continue;
-                }
-
-                damage.Add(c);
-            }
-        }
-      
-
+       
         public Boolean IsAttacking()
         {
             if (cooldown <= timeSinceLastAttack) return false;
