@@ -63,27 +63,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\collisionMove.cs" />
-    <Compile Include="Assets\DamageOnCollision.cs" />
-    <Compile Include="Assets\InputHandler.cs" />
-    <Compile Include="Assets\KeepBool.cs" />
-    <Compile Include="Assets\Knight\scripts\rotator.cs" />
-    <Compile Include="Assets\rootMotionHandler.cs" />
-    <Compile Include="Assets\Scripts\animation.cs" />
-    <Compile Include="Assets\Scripts\Camera\CameraControl.cs" />
-    <Compile Include="Assets\Scripts\Combat\Combat.cs" />
-    <Compile Include="Assets\Scripts\Combat\EnemyStats.cs" />
-    <Compile Include="Assets\Scripts\Combat\Stats.cs" />
-    <Compile Include="Assets\Scripts\Controller\EnemyController.cs" />
-    <Compile Include="Assets\Scripts\Controller\PlayerController.cs" />
+    <Compile Include="Assets\MaterialsTexturesAndStuff\Knight\scripts\rotator.cs" />
+    <Compile Include="Assets\RotateAnimation.cs" />
+    <Compile Include="Assets\Scripts\AiMovement.cs" />
+    <Compile Include="Assets\Scripts\Boss1Controller.cs" />
+    <Compile Include="Assets\Scripts\CallDamage.cs" />
+    <Compile Include="Assets\Scripts\CameraControl.cs" />
+    <Compile Include="Assets\Scripts\CombatController.cs" />
+    <Compile Include="Assets\Scripts\DamageOnCollision.cs" />
+    <Compile Include="Assets\Scripts\EnemyController.cs" />
+    <Compile Include="Assets\Scripts\EnemyStats.cs" />
+    <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\Scripts\HelperScripts\Comparer.cs" />
+    <Compile Include="Assets\Scripts\HelperScripts\MyFloat.cs" />
+    <Compile Include="Assets\Scripts\HelperScripts\NewBehaviourScript.cs" />
     <Compile Include="Assets\Scripts\HelperScripts\Rotation.cs" />
-    <Compile Include="Assets\Scripts\Movement\AiMovement.cs" />
-    <Compile Include="Assets\Scripts\Movement\PlayerMovement.cs" />
-    <Compile Include="Assets\StateManager.cs" />
+    <Compile Include="Assets\Scripts\InputHandler.cs" />
+    <Compile Include="Assets\Scripts\KeepBool.cs" />
+    <Compile Include="Assets\Scripts\LongAttackRotate.cs" />
+    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\RootMotionHandler.cs" />
+    <Compile Include="Assets\Scripts\SetDamage.cs" />
+    <Compile Include="Assets\Scripts\StaminaBar.cs" />
+    <Compile Include="Assets\Scripts\Stats.cs" />
     <None Include="Assets\Assets\Asset Packs\Animations by Explosive\README - Usage Rights for these assets 1.txt" />
     <None Include="Assets\Assets\Asset Packs\Synty - Polygon Student Sample\README - Usage Rights for these assets.txt" />
-    <None Include="Assets\Knight\shaders\doublesidedshader.shader" />
+    <None Include="Assets\paladin\shaders\pbrDoublesided.shader" />
+    <None Include="Assets\MaterialsTexturesAndStuff\Knight\shaders\doublesidedshader.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>E:/Rizvi/LabrinthineRush(3d)/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

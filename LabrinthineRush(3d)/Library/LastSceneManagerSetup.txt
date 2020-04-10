@@ -1,5 +1,5 @@
 sceneSetups:
-- path: E:/Downloads/LabrinthineRush(3d)-20200405T082000Z-001/LabrinthineRush(3d)/Assets/Scenes/SampleScene.unity
+- path: Assets/Scenes/SampleScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

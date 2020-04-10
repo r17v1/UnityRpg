@@ -11,7 +11,7 @@ namespace RPG.Helper
             Vector3 look = new Vector3(target.x, transformToRotate.y, target.z);
             //transformToRotate.LookAt(look);
 
-            var targetRotation = Quaternion.LookRotation(look - transformToRotate);
+            var targetRotation = Quaternion.LookRotation(look - transformToRotate,Vector3.up);
 
             return targetRotation;
 
