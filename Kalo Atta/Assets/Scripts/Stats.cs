@@ -71,10 +71,14 @@ namespace RPG.Combat
             currentPoise -= poiseDamage;
             if ((canMove || currentPoise <= 0) && !knockBack) 
             {
-                anim.CrossFade("damage_1", 0.2f);
+                //anim.CrossFade("empty_override", 0.1f);
+                anim.CrossFade("damage_1", 0.1f);
             }
             if (knockBack)
-                anim.CrossFade("damage_3", 0.1f);
+            {
+                //anim.CrossFade("empty_override", 0.1f);
+                anim.Play("damage_3");
+            }
             currentHealth -= damage / defence;            
             if (currentHealth <= 0) return true;
             return false;
@@ -100,7 +104,7 @@ namespace RPG.Combat
         }
         public void regenPoise()
         {
-            //if (poise <= 0) currentPoise = poise;
+            if (poise <= 0) currentPoise = poise;
             if (canMove)
                 currentPoise += poiseRegenSpeed * Time.deltaTime;
             currentPoise = Mathf.Clamp(currentPoise, 0, poise);

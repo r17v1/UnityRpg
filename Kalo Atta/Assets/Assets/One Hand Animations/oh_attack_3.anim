@@ -44788,8 +44788,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.7
+  - time: 0.8
     functionName: CloseDamageColliders
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.8
+    functionName: CancelAnimation
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

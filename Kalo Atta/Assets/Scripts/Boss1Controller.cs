@@ -93,11 +93,6 @@ namespace RPG.Controller
                     if(actionPerformed)
                         coolDown = rand.Next(Convert.ToInt32(minCooldown * 10), Convert.ToInt32(maxCooldown * 10 + 1)) / 10f;
                 }
-                if(!actionPerformed)
-                {
-                    move.SetStoppingDistance(2);
-                    move.MoveTo(player.position);
-                }
                
             }
             else

@@ -14,7 +14,8 @@ public class KeepBool : StateMachineBehaviour
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(reset)
+        if (reset)
             animator.SetBool(boolName, !status);
+        else animator.SetBool(boolName, status);
     }
 }

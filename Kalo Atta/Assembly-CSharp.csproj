@@ -63,10 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AiCombatController.cs" />
     <Compile Include="Assets\MaterialsTexturesAndStuff\Knight\scripts\rotator.cs" />
-    <Compile Include="Assets\PlayerAttacks.cs" />
     <Compile Include="Assets\RotateAnimation.cs" />
+    <Compile Include="Assets\Scripts\AiCombatController.cs" />
     <Compile Include="Assets\Scripts\AiMovement.cs" />
     <Compile Include="Assets\Scripts\Attacks.cs" />
     <Compile Include="Assets\Scripts\Boss1Controller.cs" />
@@ -85,11 +84,13 @@
     <Compile Include="Assets\Scripts\InputHandler.cs" />
     <Compile Include="Assets\Scripts\KeepBool.cs" />
     <Compile Include="Assets\Scripts\LongAttackRotate.cs" />
-    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\MovementController.cs" />
     <Compile Include="Assets\Scripts\RootMotionHandler.cs" />
     <Compile Include="Assets\Scripts\SetDamage.cs" />
     <Compile Include="Assets\Scripts\StaminaBar.cs" />
     <Compile Include="Assets\Scripts\Stats.cs" />
+    <Compile Include="Assets\Scripts\Weapons.cs" />
+    <Compile Include="Assets\Scripts\WeaponStats.cs" />
     <None Include="Assets\Assets\Asset Packs\Animations by Explosive\README - Usage Rights for these assets 1.txt" />
     <None Include="Assets\Assets\Asset Packs\Synty - Polygon Student Sample\README - Usage Rights for these assets.txt" />
     <None Include="Assets\paladin\shaders\pbrDoublesided.shader" />

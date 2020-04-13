@@ -24,11 +24,16 @@ namespace RPG.Combat
             col.poiseDamage = anim.GetFloat("poise");
             col.knockBack = anim.GetBool("knockBack");
             col.OpenDamageColliders();
+            anim.SetBool("canAttack", true);
         }
         public 
-         void CloseDamageColliders()
+        void CloseDamageColliders()
         {
             sword.GetComponent<DamageOnCollision>().CloseDamageColliders();
+        }
+        void CancelAnimation()
+        {
+            anim.SetBool("cancelAnimation", true);
         }
     }
 }

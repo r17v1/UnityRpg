@@ -35,6 +35,8 @@ namespace RPG.Controller
             combat = GetComponent<CombatController>();
             player = GameObject.Find("Player").transform;
             stats = GetComponent<EnemyStats>();
+
+            
             
         }
 
@@ -72,9 +74,9 @@ namespace RPG.Controller
             noOfCombos = twoHand ? thAttacks.Length : ohAttacks.Length;
             System.Random rnd = new System.Random();
             int currentIndex = rnd.Next(0,noOfCombos);
-            combat.updateVariables(Time.deltaTime, twoHand, ohAttacks, thAttacks, currentIndex, canMove);
-            combat.Tick();
-            combat.Attack();
+            //combat.updateVariables(Time.deltaTime, twoHand, ohAttacks, thAttacks, currentIndex, canMove);
+            //combat.Tick();
+            //combat.Attack();
         }
     }
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6246457640336229281}
   m_Layer: 0
-  m_Name: sword
+  m_Name: weaponHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,6 +76,46 @@ MonoBehaviour:
   knockBack: 0
   weaponDamage: 200
   poiseDamage: 20
+--- !u!114 &7653226454344404484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3232595495943231076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17623fbcda3ff0e4fbf07a927006e6f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponDamage: 10
+  noOfCombos: 030000000200000000000000
+  weight: 0
+  weaponName: Sword
+  oneHandStaminaRequirements:
+  - 10
+  - 15
+  - 10
+  twoHandStaminaRequirements:
+  - 15
+  - 20
+  weaponArtStaminaRequirements: []
+  oneHandDamage:
+  - 10
+  - 15
+  - 20
+  twoHandDamage:
+  - 15
+  - 15
+  weaponArtDamage: []
+  oneHandPoiseDamage:
+  - 10
+  - 10
+  - 10
+  twoHandPoiseDamage:
+  - 10
+  - 10
+  weaponArtPoiseDamage: []
 --- !u!1 &7387374977149969442
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,17 +230,19 @@ MonoBehaviour:
   runSpeed: 7
   rotationSmoothSpeed: 5
   crossFadeTime: 0.1
+  dodgeStamina: 20
   canMove: 0
   lockOn: 0
   twoHand: 0
   dodge: 0
   run: 0
-  attack: 0
+  cancelAnimation: 0
   currentAttacks: []
   ohAttacks:
   - oh_attack_1
   thAttacks:
   - th_attack_1
+  cancelAnimationDelay: 0.1
   anim: {fileID: 0}
   camera: {fileID: 0}
   controller: {fileID: 0}
@@ -232,8 +274,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 200
-  stamina: 110
-  staminaRegenSpeed: 35
+  stamina: 100
+  staminaRegenSpeed: 25
   currentHealth: 0
   currentStamina: 0
   defence: 10
@@ -273,14 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d156e101e28fc51429dbfd4d7dcdbe5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  twoHand: 0
-  crossFadeTime: 0.1
-  attackCooldownTime: 0.3
-  dodgeCooldownTime: 0.15
-  dodgeCooldown: 0
-  thAttackStamina: 20
-  ohAttackStamina: 15
-  dodgeStamina: 25
+  weaponHolder: {fileID: 6246457640336229281}
 --- !u!1001 &4154021785023211351
 PrefabInstance:
   m_ObjectHideFlags: 0
