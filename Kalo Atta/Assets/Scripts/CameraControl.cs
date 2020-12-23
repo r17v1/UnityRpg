@@ -126,6 +126,7 @@ namespace RPG.Controller
                     return Vector3.Distance(hit.point, playerOffset);
                 }
             }
+            
             return -1;
         }
 

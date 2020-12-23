@@ -6,20 +6,25 @@ namespace RPG.Combat
 {
     public class CallDamage : MonoBehaviour
     {
-        public Transform sword;
+        public Transform weaponHolder;
         DamageOnCollision col;
         Animator anim;
         Stats stats;
         private void Start()
         {
             anim = GetComponent<Animator>();
-            col = sword.GetComponent<DamageOnCollision>();
             stats = GetComponent<Stats>();
         }
         public void OpenDamageColliders()
         {
-
-            
+            foreach (Transform t in weaponHolder)
+            {
+                if (t.gameObject.activeSelf == true)
+                {
+                    col = t.GetComponent<DamageOnCollision>();
+                    break;
+                }
+            }
             col.weaponDamage = anim.GetFloat("damage")*stats.damageMultiplier;
             col.poiseDamage = anim.GetFloat("poise");
             col.knockBack = anim.GetBool("knockBack");
@@ -29,7 +34,16 @@ namespace RPG.Combat
         public 
         void CloseDamageColliders()
         {
-            sword.GetComponent<DamageOnCollision>().CloseDamageColliders();
+            foreach (Transform t in weaponHolder)
+            {
+                if (t.gameObject.activeSelf == true)
+                {
+                    col = t.GetComponent<DamageOnCollision>();
+                    break;
+                }
+            }
+            Debug.Log(col.name);
+            col.CloseDamageColliders();
         }
         void CancelAnimation()
         {

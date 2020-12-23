@@ -49,8 +49,9 @@ namespace RPG.Combat
             this.attackPressed = attackPressed;
             if (weaponArt) this.attackPressed = true;
             if (twoHand) this.twoHand = !this.twoHand;
-            if (previousWeapon && currentlyEquipedWeapon > 0) currentlyEquipedWeapon--;
-            else if (nextWeapon && currentlyEquipedWeapon < noOfWeapons) currentlyEquipedWeapon++;
+            if (previousWeapon) currentlyEquipedWeapon--;
+            if (currentlyEquipedWeapon < 0) currentlyEquipedWeapon = noOfWeapons - 1;
+            else if (nextWeapon) currentlyEquipedWeapon =(currentlyEquipedWeapon+1)%noOfWeapons;
             if (previousWeapon || nextWeapon) UpdateEquiped();
             anim.SetBool("twoHand", this.twoHand);
             TryAttack();

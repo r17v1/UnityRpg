@@ -8,13 +8,14 @@ namespace RPG.Movement
     {
         NavMeshAgent agent;
         [SerializeField] private float rotationSpeed = 4f;
+        public float runSpeed;
         void Start()
         {
             agent = GetComponent<NavMeshAgent>();
         }
         void Update()
         {
-            GetComponent<Animator>().SetFloat("vertical", agent.velocity.magnitude / agent.speed);
+            GetComponent<Animator>().SetFloat("vertical", agent.velocity.magnitude / runSpeed);
         }
 
         public void MoveTo(Vector3 target)
@@ -29,6 +30,14 @@ namespace RPG.Movement
         public void Stop()
         {
             agent.isStopped=true;
+        }
+        public void SetWalkSpeed()
+        {
+            agent.speed = runSpeed / 2;
+        }
+        public void SetRunSpeed()
+        {
+            agent.speed = runSpeed;
         }
     }
 }

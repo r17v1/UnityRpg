@@ -52,8 +52,6 @@ namespace RPG.Combat
             poiseDamages[2] = weaponStats.weaponArtPoiseDamage;
 
             this.weaponObject = weaponObject;
-
-            Debug.Log("Created! Name = " + weaponName);
         }
         public void Update()
         {
@@ -66,24 +64,23 @@ namespace RPG.Combat
 
             if (anim.GetBool("nextAttackCombo")) return;
             if (stats.currentStamina <= 0) return;
-            
             int index;
             if (weaponArt) index = 2;
             else if (twoHand) index = 1;
             else index = 0;
-            bool canAttack = anim.GetBool("canAttack");
+            if (inCombo >= noOfCombos[index]) inCombo = 0;
+
+                bool canAttack = anim.GetBool("canAttack");
             bool cancelAnimation = anim.GetBool("cancelAnimation");
             if (canMove)
                 inCombo = 0;
             else
             {
-                Debug.Log("attack");
                 if (canAttack == false) return;
                 if (noOfCombos[index] <= inCombo && cancelAnimation)
                 {
                     inCombo = 0;
                     anim.CrossFade("empty_override", 0.1f);
-                    //return;
                 }
             }
             stats.damageMultiplier = weaponDamage;
@@ -95,7 +92,6 @@ namespace RPG.Combat
             if (inCombo == 0)
             {
                 anim.SetTrigger("attack");
-                Debug.Log("combo"+inCombo);
             }
             else anim.SetBool("nextAttackCombo",true);
             waitTime = 0.2f;
@@ -105,6 +101,7 @@ namespace RPG.Combat
         public void Activate()
         {
             weaponObject.SetActive(true);
+            anim.SetInteger("weaponNo", identifier);
         }
         public void Deactivate()
         {

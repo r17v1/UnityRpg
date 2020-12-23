@@ -21,6 +21,8 @@ namespace RPG.Controller
         bool sprint;
         bool cameraLock;
         bool twoHand;
+        bool nextWeapon;
+        bool previousWeapon;
         CombatController combat;
         public LayerMask lockLayer;
 
@@ -46,7 +48,8 @@ namespace RPG.Controller
             
             if (combat.isInitialized == false) combat.Init();
             getInput();
-            combat.Tick(attack, twoHand, false, false, false);
+            combat.Tick(attack, twoHand, false,previousWeapon,nextWeapon);
+            
 
             move.Tick(vertical, horizontal, sprint, dodge, Time.deltaTime);
 
@@ -71,6 +74,8 @@ namespace RPG.Controller
             cameraLock = Input.GetButtonDown("Camera Lock");
             if (cameraLock) LockOn();
             twoHand = Input.GetButtonDown("Two Hand");
+            nextWeapon = Input.GetButtonDown("Next Weapon");
+            previousWeapon = Input.GetButtonDown("Previous Weapon");
         }
 
 

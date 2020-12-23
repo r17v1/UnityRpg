@@ -91,6 +91,7 @@
     <Compile Include="Assets\Scripts\Stats.cs" />
     <Compile Include="Assets\Scripts\Weapons.cs" />
     <Compile Include="Assets\Scripts\WeaponStats.cs" />
+    <Compile Include="Assets\setLayerWeight.cs" />
     <None Include="Assets\Assets\Asset Packs\Animations by Explosive\README - Usage Rights for these assets 1.txt" />
     <None Include="Assets\Assets\Asset Packs\Synty - Polygon Student Sample\README - Usage Rights for these assets.txt" />
     <None Include="Assets\paladin\shaders\pbrDoublesided.shader" />
